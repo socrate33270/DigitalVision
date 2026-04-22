@@ -1,0 +1,47 @@
+<% content_for :title, "Connexion admin | Digital Vision" %>
+
+<section class="mx-auto max-w-md">
+  <div class="glass rounded-3xl border border-white/10 px-6 py-8 shadow-2xl shadow-black/30 sm:px-8">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-indigo-300">Administration</p>
+    <h1 class="text-3xl font-extrabold tracking-tight text-white">Connexion</h1>
+    <p class="mt-3 text-sm text-gray-300">
+      Utilise le compte administrateur pour acceder au tableau de bord des leads.
+    </p>
+
+    <%= form_for(resource,
+                 as: resource_name,
+                 url: session_path(resource_name),
+                 html: { class: "mt-8 space-y-6", data: { turbo: false } }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div>
+        <%= f.label :email, "Email", class: "mb-2 block text-sm font-semibold text-gray-200" %>
+        <%= f.email_field :email,
+                          autofocus: true,
+                          autocomplete: "email",
+                          class: "w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-gray-500 focus:border-indigo-400 focus:bg-white/10" %>
+      </div>
+
+      <div>
+        <%= f.label :password, "Mot de passe", class: "mb-2 block text-sm font-semibold text-gray-200" %>
+        <%= f.password_field :password,
+                             autocomplete: "current-password",
+                             class: "w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-gray-500 focus:border-indigo-400 focus:bg-white/10" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <label class="flex items-center gap-3 text-sm text-gray-300">
+          <%= f.check_box :remember_me, class: "h-4 w-4 rounded border-white/20 bg-white/5 text-indigo-500 focus:ring-indigo-400" %>
+          <span>Rester connecte</span>
+        </label>
+      <% end %>
+
+      <%= f.submit "Se connecter",
+                   class: "w-full rounded-2xl bg-white px-4 py-3 text-sm font-bold text-black transition hover:bg-indigo-100" %>
+    <% end %>
+
+    <div class="mt-6 border-t border-white/10 pt-5">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</section>

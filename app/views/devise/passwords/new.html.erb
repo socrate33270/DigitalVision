@@ -1,0 +1,33 @@
+<% content_for :title, "Mot de passe admin | Digital Vision" %>
+
+<section class="mx-auto max-w-md">
+  <div class="glass rounded-3xl border border-white/10 px-6 py-8 shadow-2xl shadow-black/30 sm:px-8">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-indigo-300">Administration</p>
+    <h1 class="text-3xl font-extrabold tracking-tight text-white">Mot de passe oublie</h1>
+    <p class="mt-3 text-sm text-gray-300">
+      Saisis ton email administrateur pour recevoir les instructions de reinitialisation.
+    </p>
+
+    <%= form_for(resource,
+                 as: resource_name,
+                 url: password_path(resource_name),
+                 html: { method: :post, class: "mt-8 space-y-6", data: { turbo: false } }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div>
+        <%= f.label :email, "Email", class: "mb-2 block text-sm font-semibold text-gray-200" %>
+        <%= f.email_field :email,
+                          autofocus: true,
+                          autocomplete: "email",
+                          class: "w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-gray-500 focus:border-indigo-400 focus:bg-white/10" %>
+      </div>
+
+      <%= f.submit "Envoyer les instructions",
+                   class: "w-full rounded-2xl bg-white px-4 py-3 text-sm font-bold text-black transition hover:bg-indigo-100" %>
+    <% end %>
+
+    <div class="mt-6 border-t border-white/10 pt-5">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</section>
