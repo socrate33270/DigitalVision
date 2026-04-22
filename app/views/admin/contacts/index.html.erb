@@ -1,0 +1,12 @@
+<% content_for :title, "Leads | Admin Digital Vision" %>
+
+<div
+  data-controller="contacts-sync"
+  data-contacts-sync-url-value="<%= admin_contacts_path(format: :turbo_stream) %>"
+  data-contacts-sync-interval-value="5000"
+>
+  <%= render "admin/contacts/board",
+             statuses: @statuses,
+             contacts_by_status: @contacts_by_status,
+             status_counts: @status_counts %>
+</div>

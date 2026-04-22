@@ -1,0 +1,38 @@
+<section id="services" class="px-4 py-24">
+  <div class="mx-auto max-w-7xl">
+    <div class="mb-16">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-indigo-300">Nos expertises</p>
+      <h2 class="mb-4 text-3xl font-bold italic md:text-4xl">Des leviers digitaux connectés à vos objectifs</h2>
+      <div class="h-1 w-20 bg-indigo-500"></div>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <% services.each do |service| %>
+        <% card_classes = case service[:theme]
+          when :purple then "hover:border-purple-500/50"
+          when :pink then "border-indigo-500/30 bg-indigo-500/5 hover:border-indigo-500"
+          else "hover:border-indigo-500/50"
+        end %>
+        <% icon_classes = case service[:theme]
+          when :purple then "bg-purple-500/20 text-purple-300"
+          when :pink then "bg-pink-500/20 text-pink-300"
+          else "bg-indigo-500/20 text-indigo-300"
+        end %>
+
+        <article class="glass group relative overflow-hidden rounded-lg p-8 transition <%= card_classes %>">
+          <% if service[:featured] %>
+            <span class="absolute right-0 top-0 rounded-bl-lg bg-indigo-600 px-3 py-2 text-[10px] font-bold uppercase tracking-widest">Nouveau</span>
+          <% end %>
+
+          <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg transition group-hover:scale-110 <%= icon_classes %>">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<%= service[:icon_path] %>" />
+            </svg>
+          </div>
+          <h3 class="mb-4 text-xl font-bold"><%= service[:title] %></h3>
+          <p class="leading-relaxed text-gray-400"><%= service[:description] %></p>
+        </article>
+      <% end %>
+    </div>
+  </div>
+</section>

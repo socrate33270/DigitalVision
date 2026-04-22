@@ -1,0 +1,8 @@
+<div id="flash" class="fixed inset-x-0 top-24 z-40 mx-auto max-w-3xl px-4">
+  <% flash.each do |type, message| %>
+    <% tone = type.to_sym == :notice ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-100" : "border-rose-400/30 bg-rose-500/10 text-rose-100" %>
+    <div class="glass mb-3 rounded-lg border px-4 py-3 text-sm shadow-xl <%= tone %>">
+      <%= message %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,35 @@
+<div id="contacts_board" class="mx-auto max-w-[1800px]">
+  <div class="mb-8 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
+    <div>
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-indigo-300">Dashboard administrateur</p>
+      <h1 class="text-4xl font-extrabold tracking-tight md:text-5xl">
+        Gestion des <span class="gradient-text">leads entrants</span>
+      </h1>
+      <p class="mt-4 max-w-3xl text-gray-400">
+        Toutes les demandes du formulaire sont centralisées ici et la vue admin se synchronise automatiquement.
+      </p>
+    </div>
+
+    <div class="glass rounded-lg px-5 py-4">
+      <p class="text-xs uppercase tracking-[0.18em] text-gray-500">Total leads</p>
+      <p class="mt-1 text-3xl font-extrabold"><%= status_counts.values.sum %></p>
+    </div>
+  </div>
+
+  <div class="grid gap-5 xl:grid-cols-4">
+    <% statuses.each do |status| %>
+      <section class="min-h-[70vh] rounded-lg border border-white/10 bg-white/[0.02] p-4">
+        <div class="mb-5 flex items-center justify-between">
+          <h2 class="text-xs font-extrabold uppercase tracking-[0.2em] text-gray-300">
+            <%= Contact::STATUS_LABELS.fetch(status) %>
+          </h2>
+          <%= render "admin/contacts/status_count", status:, count: status_counts.fetch(status) %>
+        </div>
+
+        <div id="contacts_list_<%= status %>" class="space-y-4">
+          <%= render partial: "admin/contacts/contact", collection: contacts_by_status.fetch(status), as: :contact %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+</div>

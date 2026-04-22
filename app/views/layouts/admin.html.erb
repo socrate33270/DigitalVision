@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <title><%= content_for(:title) || "Admin Digital Vision" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-[#0a0a0c] text-white antialiased">
+    <aside class="fixed inset-y-0 left-0 z-40 hidden w-72 border-r border-white/10 bg-[#0a0a0c]/95 px-6 py-8 backdrop-blur-xl lg:block">
+      <%= link_to "Digital Vision", admin_root_path, class: "gradient-text text-2xl font-extrabold uppercase tracking-tight" %>
+
+      <nav class="mt-12 space-y-3">
+        <%= link_to admin_contacts_path, class: "group flex items-center justify-between rounded-lg px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/5" do %>
+          <span>Leads</span>
+          <span class="h-1 w-10 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600"></span>
+        <% end %>
+        <%= link_to root_path, class: "block rounded-lg px-4 py-3 text-sm font-semibold text-gray-400 transition hover:bg-white/5 hover:text-white" do %>
+          Voir la vitrine
+        <% end %>
+      </nav>
+
+      <div class="absolute bottom-8 left-6 right-6">
+        <p class="mb-3 text-xs uppercase tracking-[0.18em] text-gray-500">Connecté</p>
+        <p class="truncate text-sm text-gray-300"><%= current_admin_user.email %></p>
+        <%= button_to "Déconnexion", destroy_admin_user_session_path, method: :delete, class: "mt-4 w-full rounded-lg border border-white/10 px-4 py-3 text-sm font-bold text-gray-200 transition hover:border-indigo-500/60 hover:bg-white/5" %>
+      </div>
+    </aside>
+
+    <div class="lg:pl-72">
+      <header class="sticky top-0 z-30 border-b border-white/10 bg-[#0a0a0c]/85 px-4 py-4 backdrop-blur-xl lg:hidden">
+        <div class="flex items-center justify-between">
+          <%= link_to "Digital Vision", admin_root_path, class: "gradient-text text-xl font-extrabold uppercase tracking-tight" %>
+          <%= button_to "Sortir", destroy_admin_user_session_path, method: :delete, class: "rounded-lg border border-white/10 px-3 py-2 text-sm font-bold text-gray-200" %>
+        </div>
+      </header>
+
+      <div id="flash" class="mx-auto max-w-7xl px-4 pt-6">
+        <% flash.each do |type, message| %>
+          <% tone = type.to_sym == :notice ? "border-emerald-400/30 bg-emerald-500/10 text-emerald-100" : "border-rose-400/30 bg-rose-500/10 text-rose-100" %>
+          <div class="glass mb-3 rounded-lg border px-4 py-3 text-sm <%= tone %>">
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
+
+      <main class="min-h-screen px-4 py-6 lg:px-8">
+        <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>

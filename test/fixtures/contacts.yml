@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  full_name: Alice Martin
+  email: alice@example.com
+  service_type: Automatisation IA
+  message: Je souhaite automatiser mon suivi commercial.
+  status: en_attente
+  read: false
+
+two:
+  full_name: Karim Dubois
+  email: karim@example.com
+  service_type: Formation IA
+  message: Nous cherchons une formation IA pour notre équipe marketing.
+  status: repondu
+  read: false
