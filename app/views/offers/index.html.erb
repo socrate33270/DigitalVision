@@ -1,0 +1,13 @@
+<% content_for :title, "Offres | Digital Vision" %>
+
+<div class="relative overflow-hidden">
+  <div class="blob left-[-16%] top-[10%] animate-pulse"></div>
+  <div class="blob bottom-[-10%] right-[-12%] animate-pulse delay-500"></div>
+
+  <%= render "offers/hero", catalog: @catalog %>
+  <%= render "offers/subnav", catalog: @catalog %>
+  <%= render "offers/community_management", catalog: @catalog %>
+  <%= render "offers/websites", catalog: @catalog %>
+  <%= render "offers/bundles", catalog: @catalog %>
+  <%= render "offers/comparison", catalog: @catalog %>
+</div>

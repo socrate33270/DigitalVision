@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   root "pages#home"
+  resources :offers, only: :index, path: "offres"
 
   resources :contacts, only: :create
 

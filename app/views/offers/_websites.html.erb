@@ -1,0 +1,20 @@
+<section id="sites-web" class="border-t border-white/5 px-4 py-18 lg:py-24">
+  <div class="mx-auto max-w-7xl">
+    <div class="mb-14">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-300">02. Sites Web</p>
+      <h2 class="max-w-3xl text-3xl font-extrabold tracking-tight md:text-5xl">
+        Creation de sites
+      </h2>
+      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-gray-400">
+        Sites vitrines et sites avec back-office. Les tarifs ci-dessous couvrent la creation,
+        avec des maintenances optionnelles lorsque le projet le demande.
+      </p>
+    </div>
+
+    <div class="grid gap-6 xl:grid-cols-3">
+      <% catalog.website_plans.each do |plan| %>
+        <%= render "offers/plan_card", plan: %>
+      <% end %>
+    </div>
+  </div>
+</section>

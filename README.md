@@ -72,7 +72,10 @@ L'application utilise PostgreSQL. Vérifiez que le service PostgreSQL est lancé
 - `app/models/contact.rb` : modèle de demande de contact, validations et scope `unread` prêt pour un futur dashboard admin.
 - `app/models/admin_user.rb` : compte administrateur Devise.
 - `app/models/homepage_content.rb` : contenus éditables de la page d'accueil, notamment services, solutions IA et formations.
+- `app/models/offer_catalog.rb` : catalogue éditorial de la page offres.
+- `app/models/offer_plan.rb`, `offer_bundle.rb`, `offer_comparison_row.rb`, `offer_comparison_value.rb` : modèles Ruby non persistants qui structurent les cartes et le tableau comparatif.
 - `app/controllers/pages_controller.rb` : prépare la home et instancie `@contact`.
+- `app/controllers/offers_controller.rb` : prépare la page publique `/offres`.
 - `app/controllers/contacts_controller.rb` : reçoit le formulaire, applique les Strong Parameters, répond en Turbo Stream ou HTML.
 - `app/controllers/admin/base_controller.rb` : sécurise le namespace admin avec `authenticate_admin_user!`.
 - `app/controllers/admin/contacts_controller.rb` : affiche les leads par statut, met à jour le Kanban et sert la synchro Turbo du dashboard.
@@ -82,6 +85,7 @@ L'application utilise PostgreSQL. Vérifiez que le service PostgreSQL est lancé
 - `app/views/layouts/_footer.html.erb` : pied de page.
 - `app/views/pages/home.html.erb` : assemble les sections de la page.
 - `app/views/pages/partials/` : partials `_hero`, `_services`, `_ai_solutions`, `_formations`, `_contact_form`.
+- `app/views/offers/` : page offres découpée en partials (`_hero`, `_subnav`, `_community_management`, `_websites`, `_bundles`, `_comparison`, `_plan_card`).
 - `app/views/admin/contacts/index.html.erb` : Kanban des leads.
 - `app/views/admin/contacts/_board.html.erb` : contenu réutilisable du tableau admin pour le rafraîchissement automatique.
 - `app/views/admin/contacts/_contact.html.erb` : carte individuelle d'un lead.
@@ -106,6 +110,28 @@ Après ajout de nouvelles classes Tailwind dans les vues, relancez :
 
 ```bash
 rbenv exec ruby bin/rails tailwindcss:build
+```
+
+## Page Offres
+
+La page publique des offres est disponible sur :
+
+```text
+/offres
+```
+
+Elle expose trois blocs principaux :
+
+- packs de community management
+- offres de création de sites
+- offres combinées site + community management
+
+Le contenu est centralisé dans `app/models/offer_catalog.rb`. Les objets Ruby non persistants associés permettent de garder les vues DRY et d'éviter les gros tableaux de hash directement dans les templates.
+
+Une documentation ciblée a été ajoutée ici :
+
+```text
+docs/OFFERS_PAGE.md
 ```
 
 ## Ajouter une formation

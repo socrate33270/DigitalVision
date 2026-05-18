@@ -1,0 +1,70 @@
+<% theme = offer_theme_classes(plan.theme) %>
+
+<article class="glass group flex h-full flex-col overflow-hidden rounded-[1.75rem] border transition duration-200 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/20 <%= theme[:panel] %> <%= "ring-2 ring-indigo-400/60" if plan.featured? %>">
+  <div class="relative p-6 md:p-7 <%= theme[:header] %>">
+    <% if plan.featured? %>
+      <span class="absolute right-5 top-5 rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-black">
+        <%= plan.featured_label %>
+      </span>
+    <% end %>
+
+    <span class="inline-flex rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] <%= theme[:badge] %>">
+      <%= plan.badge %>
+    </span>
+
+    <h3 class="mt-5 text-2xl font-extrabold tracking-tight text-white"><%= plan.name %></h3>
+    <p class="mt-3 min-h-[3.5rem] text-sm leading-relaxed <%= theme[:muted] %>"><%= plan.description %></p>
+
+    <div class="mt-6 flex items-end gap-2">
+      <p class="text-4xl font-extrabold tracking-tight text-white"><%= plan.price %></p>
+      <% unless plan.quote? %>
+        <p class="pb-1 text-sm font-semibold text-gray-300">EUR</p>
+      <% end %>
+      <% if plan.billing_detail.present? %>
+        <p class="pb-1 text-sm text-gray-400"><%= plan.billing_detail %></p>
+      <% end %>
+    </div>
+
+    <% if plan.price_context.present? %>
+      <p class="mt-2 text-xs italic <%= theme[:muted] %>"><%= plan.price_context %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-1 flex-col p-6 md:p-7">
+    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">Inclus</p>
+    <ul class="mt-5 space-y-3">
+      <% plan.included_features.each do |feature| %>
+        <li class="flex gap-3 border-b border-white/5 pb-3 text-sm leading-relaxed text-gray-200 last:border-b-0 last:pb-0">
+          <span class="mt-0.5 font-bold <%= theme[:accent] %>">✓</span>
+          <span><%= feature %></span>
+        </li>
+      <% end %>
+    </ul>
+
+    <% if plan.excluded_features.any? %>
+      <div class="mt-6 space-y-2">
+        <% plan.excluded_features.each do |feature| %>
+          <p class="flex gap-3 text-sm text-gray-500">
+            <span>–</span>
+            <span><%= feature %></span>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if plan.footer_note.present? %>
+      <div class="mt-6 rounded-2xl border p-4 text-sm leading-relaxed <%= theme[:note] %>">
+        <%= plan.footer_note %>
+      </div>
+    <% end %>
+
+    <div class="mt-8">
+      <%= link_to plan.cta_label,
+                  landing_section_path("contact"),
+                  class: "block rounded-2xl px-5 py-3 text-center text-sm font-bold transition #{theme[:button]}" %>
+      <% if plan.engagement.present? %>
+        <p class="mt-3 text-center text-xs uppercase tracking-[0.14em] text-gray-500"><%= plan.engagement %></p>
+      <% end %>
+    </div>
+  </div>
+</article>

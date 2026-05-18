@@ -1,0 +1,38 @@
+<section id="comparatif-cm" class="border-t border-white/5 px-4 py-18 lg:py-24">
+  <div class="mx-auto max-w-7xl">
+    <div class="mb-14">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-purple-300">04. Comparatif</p>
+      <h2 class="max-w-3xl text-3xl font-extrabold tracking-tight md:text-5xl">
+        Ce qui est inclus dans chaque pack CM
+      </h2>
+      <p class="mt-4 max-w-3xl text-lg leading-relaxed text-gray-400">
+        Vue d'ensemble pour faciliter le choix, sans multiplier les explications commerciales.
+      </p>
+    </div>
+
+    <div class="glass overflow-hidden rounded-[1.75rem] border border-white/10">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-white/10 text-sm">
+          <thead class="bg-white/[0.04]">
+            <tr>
+              <th class="px-5 py-4 text-left text-xs font-semibold uppercase tracking-[0.18em] text-gray-400">Fonctionnalite</th>
+              <th class="px-5 py-4 text-left text-xs font-semibold uppercase tracking-[0.18em] text-gray-400">300EUR Essentiel</th>
+              <th class="px-5 py-4 text-left text-xs font-semibold uppercase tracking-[0.18em] text-gray-400">450EUR Duo</th>
+              <th class="px-5 py-4 text-left text-xs font-semibold uppercase tracking-[0.18em] text-gray-400">650EUR Full</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5">
+            <% catalog.comparison_rows.each do |row| %>
+              <tr class="transition hover:bg-white/[0.02]">
+                <td class="px-5 py-4 font-medium text-white"><%= row.label %></td>
+                <% row.values.each do |value| %>
+                  <td class="px-5 py-4 <%= comparison_value_classes(value) %>"><%= value.label %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
